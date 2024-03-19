@@ -1,7 +1,7 @@
+import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { json, useLoaderData } from "@remix-run/react";
-import { db } from "../utils/db.server";
 
-export async function loader() {
+export async function loader({ context: { db } }: LoaderFunctionArgs) {
   const users = await db.user.findMany();
   return json({ users });
 }
